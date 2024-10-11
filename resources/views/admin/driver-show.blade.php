@@ -86,12 +86,12 @@
             <!-- Modify Driver Section -->
             <div class="flex flex-col space-y-1 justify-center items-center">
                 <p>Modificar Conductor</p>
-                <a href="#" class="btn flex justify-center items-center">
+                <a href="{{ route('admin.driver_edit',$driver->id) }}" class="btn flex justify-center items-center">
                     <img src="{{ asset('images/icons/modify.svg') }}" alt="">
                 </a> 
             </div>
         </div>
-    </section>
+    </section>        
 
     <!-- Confirmation script -->
     <script>

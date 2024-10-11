@@ -35,9 +35,11 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/admin/clienteView', [CustomerController::class, 'indexCustomer'])->name('admin.cliente_index');
     Route::get('/admin/cliente', [CustomerController::class, 'createForm'])->name('admin.clienteForm');
     Route::post('/admin/cliente', [CustomerController::class, 'registerCustomer'])->name('admin.registerCliente');
-    Route::get('/admin/customer/{id}', [CustomerController::class, 'show'])->name('admin.customer_show');
+    Route::get('/admin/customers/{id}', [CustomerController::class, 'show'])->name('admin.customer_show');
     Route::delete('/admin/{customer}', [CustomerController::class, 'eliminarcustomer'])->name('admin.destroy_customer');
-   
+    
+    Route::get('/admin/customer/{id}', [CustomerController::class, 'edit'])->name('admin.customer_edit');
+    Route::put('/admin/customer/{id}', [CustomerController::class, 'update'])->name('admin.customer.update');
     Route::post('/admin/logout', action: [UserController::class, 'logout'])->name('admin.logout');
 
     //gestion de rutas 
@@ -47,13 +49,19 @@ Route::middleware(['role:admin'])->group(function () {
     //iniciar ruta
     Route::post('/admin/routes_post',[driverRouteController::class,'iniciarRuta'])->name('admin.iniciar_ruta');
 
-
-    //rutas de conductores
+    //ruta para gestionar conductores
     Route::get('/admin/driver', [DriverController::class, 'index'])->name('admin.drivers');
     Route::get('/admin/driverView', [DriverController::class, 'create'])->name('admin.driverForm');
     Route::post('/admin/driverRegister', [DriverController::class, 'registerDriver'])->name('admin.registerDriver');
-    Route::get('/admin/driver/{id}', [DriverController::class, 'show'])->name('admin.driver_show');
-    Route::delete('/admin/{driver}', [DriverController::class, 'eliminardriver'])->name('admin.destroy_driver');
+    Route::get('/admin/drivers/{id}', [DriverController::class, 'show'])->name('admin.driver_show');
+    Route::delete('/admin/drivers/{driver}', [DriverController::class, 'eliminardriver'])->name('admin.destroy_driver');
+
+    Route::put('/admin/driver/{id}', [DriverController::class, 'update'])->name('admin.driver.update');
+
+    //para gestionar la actualizacion de registro
+    Route::get('/admin/driver{id}',[DriverController::class, 'edit'])->name('admin.driver_edit');
+ 
+
 });
 
 // // Rutas para conductores

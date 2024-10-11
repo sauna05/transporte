@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Driver;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -29,6 +30,7 @@ class CustomerController extends Controller
         
         return view('admin.customer-create');
     }
+    
      
     public function registerCustomer(Request $request)
     {
@@ -61,18 +63,9 @@ class CustomerController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'document' => $request->document, 
-           
-            
         ]);
-       
-    
-        //$user->roles()->attach($request->role_id);
 
-        // Asignar rol al usuario
-         $user->roles()->attach(2);
-   
-
-
+        $user->roles()->attach(2);
         // Crear el cliente asociado al usuario
         Customer::create([
             "user_id" => $user->id,  // Aquí obtenemos el el id del usuario recien creadi
@@ -81,20 +74,9 @@ class CustomerController extends Controller
     
         return redirect()->route('admin.clienteForm')->with('message', 'Cliente creado con éxito.');
     }
-    /**
-     * Display a listing of the customers.
-    */
-    // public function index()
-    // {
-    //     $customers = Customer::all();
-    //     return view('customers.index', ['customers' => $customers]);
-    // }
 
     public function eliminarcustomer(Customer $customer)
-    {
-        // Detach routes before deleting the driver
-        
-    
+    {    
         // Get the associated user
         $user = $customer->user;
     
@@ -114,8 +96,39 @@ class CustomerController extends Controller
     {
         // Obtener el conductor específico junto con su usuario
         $customer = Customer::with('user')->findOrFail($id);
-        
         // Pasar el conductor a la vista
-        return view('admin.driver-show', compact('customer'));
+        return view('admin.customer-show', compact('customer'));
+    }
+
+    //cargar datos del conductor
+    public function edit($id) {
+        $customer = Customer::with('user')->findOrFail($id);
+        return view('admin.customer-edit', compact('customer'));
+    }
+    
+    public function update(Request $request, $id) {
+        // Validar los datos
+        $datos = $request->validate([
+            'document' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone_number' => 'required|string|max:15',
+        ]);
+    
+        // Encontrar al cliente y su usuario asociado
+        $customer = Customer::with('user')->findOrFail($id);
+        
+        // Actualizar los datos del usuario
+        $customer->user->update([
+            'document' => $datos['document'],
+            'name' => $datos['name'],
+            'email' => $datos['email'],
+        ]);
+    
+        // Actualizar el número de teléfono del cliente
+        $customer->phone_number = $datos['phone_number'];
+        $customer->save();
+    
+        return redirect()->route('admin.cliente_index')->with('message', 'Cliente actualizado con éxito');
     }
 }
