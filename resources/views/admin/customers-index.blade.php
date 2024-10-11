@@ -9,7 +9,7 @@
         {{-- Listado de Clientes --}}
         @if ($customers && $customers->isNotEmpty())
             @foreach ($customers as $customer)
-                <a class="flex w-2/4 border-b-2 border-gray-500 hover:bg-gray-300/50 rounded-md p-2 space-x-5" href="#">
+                <a class="flex w-2/4 border-b-2 border-gray-500 hover:bg-gray-300/50 rounded-md p-2 space-x-5" href="{{route('admin.customer_show',$customer->id)}}">
                     <div class="flex justify-center items-center">
                         <img src="{{ asset('images/cliente-por-defecto.png') }}" class="w-36" alt="">
                     </div>

@@ -192,15 +192,23 @@ class DriverController extends Controller
         return redirect()->route('drivers.index')->with('success', 'Conductor actualizado con éxito');
     }
 
-    public function destroy($id)
+    public function eliminardriver(Driver $driver)
     {
-        $driver = Driver::findOrFail($id);
+        // Detach routes before deleting the driver
         
-       // Desasignar rutas antes de eliminar el conductor
-       $driver->routes()->detach();
-       $driver->delete();
-
-       return redirect()->route('drivers.index')->with('success', 'Conductor eliminado con éxito');
-   }
+    
+        // Get the associated user
+        $user = $driver->user;
+    
+        // Delete the driver
+        $driver->delete();
+    
+        // Delete the associated user
+        if ($user) {
+            $user->delete();
+        }
+    
+        return redirect()->route('admin.drivers')->with('message', 'Conductor y usuario eliminados con éxito');
+    }
    
 }

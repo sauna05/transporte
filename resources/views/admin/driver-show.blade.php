@@ -3,34 +3,29 @@
     {{-- Cada article es un registro --}}
     <section class="flex space-x-20">
         @if($driver->imagen)
-
-          <img src="{{ asset('storage/' . $driver->imagen) }}" class="w-96" alt="Conductor">     
+            <img src="{{ asset('storage/' . $driver->imagen) }}" class="w-96" alt="Conductor">     
         @else        
-          <img src="{{ asset('images/customers/Donna-sorridente-830x625.webp') }}" class="w-96" alt="Conductor">
+            <img src="{{ asset('images/customers/Donna-sorridente-830x625.webp') }}" class="w-96" alt="Conductor">
         @endif
         <article class="space-y-5">
             <article class="space-y-5 self-center items-center">
-                <h1 class="text-2xl font-bold mb-5">{{$driver->user->name}}</h1>
+                <h1 class="text-2xl font-bold mb-5">{{ $driver->user->name }}</h1>
 
                 <div class="flex space-x-5">
                     <h4 class="w-28 text-right font-bold">Licencia:</h4>
-                    <p class="parrafo">{{ $driver->licence->name }}</p> <!-- Mostrar el tipo de licencia -->
+                    <p class="parrafo">{{ $driver->licence->name }}</p>
                 </div>
 
                 <div class="flex space-x-5">
                     <h4 class="w-28 text-right font-bold">Experiencia:</h4>
-                    <p class="parrafo">{{ $driver->experience }} {{ $driver->experience === 1 ? 'año' : 'años' }}</p> <!-- Mostrar la experiencia -->
+                    <p class="parrafo">{{ $driver->experience }} {{ $driver->experience === 1 ? 'año' : 'años' }}</p>
                 </div>
 
                 <div class="flex space-x-5">
                     <h4 class="w-28 text-right font-bold">Disponibilidad:</h4>
-                    <p class="parrafo">{{$driver->availability}}</p> <!-- Mostrar disponibilidad -->
+                    <p class="parrafo">{{ $driver->availability }}</p>
                 </div>
             </article>
-        
-
-            </div>  
-
         </article>
 
         {{-- En caso de que el camión se encuentre en ruta --}}
@@ -39,27 +34,26 @@
 
             <div class="flex space-x-5">
                 <h4 class="w-28 text-right font-bold">Entregas totales:</h4>
-                <p class="parrafo">7</p> <!-- Mostrar el total de entregas -->
+                <p class="parrafo">7</p> 
             </div>
 
             <div class="flex space-x-5">
                 <h4 class="w-28 text-right font-bold">Entregas a tiempo:</h4>
-                <p class="parrafo">4</p> <!-- Mostrar entregas a tiempo -->
+                <p class="parrafo">4</p> 
             </div>
 
             <div class="flex space-x-5 items-center ">
                 <h4 class="w-28 text-right font-bold">Accidentes:</h4>
-              <!-- Mostrar número de accidentes -->
-                <form action="" class="flex items-center">
-                    <label for="accidents"></label>
+                <form action="" method="POST" class="flex items-center">
+                    @csrf
+                    @method('PUT') <!-- Adjust this if you're updating accidents -->
                     <input type="number" min="0" name="accidents" id="accidents" class="w-24 mr-5 bg-slate-300 rounded-md pl-2">
-                    <button class="btn h-10">Actualizar Accidentes</button>
+                    <button type="submit" class="btn h-10">Actualizar Accidentes</button>
                 </form>
             </div>
 
             <div class="flex space-x-5 items-center">
                 <h4 class="w-28 text-right font-bold">Puntuación:</h4>
-                
                 {{-- ESTRELLAS --}}
                 <div class="flex">
                     @for ($i = 0; $i < 3; $i++)
@@ -74,27 +68,36 @@
         <div class="flex flex-col space-y-1 justify-center items-center ">
             <p>Ver ruta Asignada</p>
             <a href="#" class="btn flex justify-center items-center">
-                <img src="{{asset('images\icons\route.svg')}}" alt="">
-            </a> <!-- Asegúrate de que esta ruta esté definida -->
+                <img src="{{ asset('images/icons/route.svg') }}" alt="">
+            </a> 
         </div>
-    
+
         <div class="flex justify-between items-center space-x-10 ">
-            <form action="#" method="POST" class="flex flex-col space-y-1 justify-center items-center">
+            <!-- Corrected delete form -->
+            <form  action="{{ route('admin.destroy_driver', $driver->id) }}" onclick="return eliminarConfirm();" method="POST" class="flex flex-col space-y-1 justify-center items-center">
                 @csrf
                 @method("DELETE")
                 <p>Eliminar Conductor</p>
-                <button class="btn flex justify-center items-center">
-                    <img src="{{asset('images\icons\delete.svg')}}" alt="">
+                <button type="submit" class="btn flex justify-center items-center">
+                    <img src="{{ asset('images/icons/delete.svg') }}" alt="">
                 </button>
             </form>
 
+            <!-- Modify Driver Section -->
             <div class="flex flex-col space-y-1 justify-center items-center">
                 <p>Modificar Conductor</p>
                 <a href="#" class="btn flex justify-center items-center">
-                    <img src="{{asset('images\icons\modify.svg')}}" alt="">
-                </a> <!-- Asegúrate de que esta ruta esté definida -->
+                    <img src="{{ asset('images/icons/modify.svg') }}" alt="">
+                </a> 
             </div>
         </div>
     </section>
+
+    <!-- Confirmation script -->
+    <script>
+        function eliminarConfirm() {
+            return confirm('¿Está seguro que desea eliminar a este conductor?');
+        }
+    </script>
 
 </x-layout-admin>

@@ -35,7 +35,9 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/admin/clienteView', [CustomerController::class, 'indexCustomer'])->name('admin.cliente_index');
     Route::get('/admin/cliente', [CustomerController::class, 'createForm'])->name('admin.clienteForm');
     Route::post('/admin/cliente', [CustomerController::class, 'registerCustomer'])->name('admin.registerCliente');
-
+    Route::get('/admin/customer/{id}', [CustomerController::class, 'show'])->name('admin.customer_show');
+    Route::delete('/admin/{customer}', [CustomerController::class, 'eliminarcustomer'])->name('admin.destroy_customer');
+   
     Route::post('/admin/logout', action: [UserController::class, 'logout'])->name('admin.logout');
 
     //gestion de rutas 
@@ -51,7 +53,7 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/admin/driverView', [DriverController::class, 'create'])->name('admin.driverForm');
     Route::post('/admin/driverRegister', [DriverController::class, 'registerDriver'])->name('admin.registerDriver');
     Route::get('/admin/driver/{id}', [DriverController::class, 'show'])->name('admin.driver_show');
-
+    Route::delete('/admin/{driver}', [DriverController::class, 'eliminardriver'])->name('admin.destroy_driver');
 });
 
 // // Rutas para conductores
@@ -72,5 +74,7 @@ Route::middleware(['role:cliente'])->group(function () {
     Route::post('/admin/logoutCustomer', action: [UserController::class, 'logout'])->name('cliente.logout');
     
 });
+
+
 
 

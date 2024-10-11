@@ -89,4 +89,33 @@ class CustomerController extends Controller
     //     $customers = Customer::all();
     //     return view('customers.index', ['customers' => $customers]);
     // }
+
+    public function eliminarcustomer(Customer $customer)
+    {
+        // Detach routes before deleting the driver
+        
+    
+        // Get the associated user
+        $user = $customer->user;
+    
+        // Delete the driver
+        $customer->delete();
+    
+        // Delete the associated user
+        if ($user) {
+            $user->delete();
+        }
+    
+        return redirect()->route('admin.cliente_index')->with('message', 'cliente eliminado con éxito');
+    }
+
+
+    public function show($id)
+    {
+        // Obtener el conductor específico junto con su usuario
+        $customer = Customer::with('user')->findOrFail($id);
+        
+        // Pasar el conductor a la vista
+        return view('admin.driver-show', compact('customer'));
+    }
 }

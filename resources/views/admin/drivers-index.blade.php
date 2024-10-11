@@ -6,6 +6,14 @@
             <a href="{{ route('admin.driverForm') }}" class="btn flex justify-center items-center">Añadir Conductor</a>
         </div>
 
+        @if (session('message'))
+        <div class="bg-green-500 text-white p-4 rounded mb-4">
+            {{ session('message') }}
+        </div>
+        @endif
+
+
+
         {{-- Listado de Conductores --}}
         @if ($drivers && $drivers->isNotEmpty())
             @foreach ($drivers as $driver)
