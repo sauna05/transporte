@@ -1,5 +1,4 @@
 <x-layout-admin title="Conductor">
-
     {{-- Cada article es un registro --}}
     <section class="flex space-x-20">
         @if($driver->imagen)

@@ -29,7 +29,7 @@
             <a href="{{route('admin.drivers')}}" class="text-fondo-0 parrafo font-medium w-full h-full flex items-center justify-center hover:bg-[#2B71B7] transition-all">Conductores</a>
             <a href="{{ route('admin.vehicles') }}" class="text-fondo-0 parrafo font-medium w-full h-full flex items-center justify-center hover:bg-[#2B71B7] transition-all">Vehiculos</a>
             <a href="{{ route('admin.cliente_index') }}" class="text-fondo-0 parrafo font-medium w-full h-full flex items-center justify-center hover:bg-[#2B71B7] transition-all">Clientes</a>
-            <a href="{{ route('admin.vehicles') }}" class="text-fondo-0 parrafo font-medium w-full h-full flex items-center justify-center hover:bg-[#2B71B7] transition-all">Reportes</a>
+            <a href="{{ route('admin.reports') }}" class="text-fondo-0 parrafo font-medium w-full h-full flex items-center justify-center hover:bg-[#2B71B7] transition-all">Reportes</a>
         </nav>
         {{-- <button class="flex items-center text-gray-700 focus:outline-none" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
             <img class="w-10 h-10 rounded-full border-2 border-indigo-600" src="{{ asset('storage/' . auth()->user()->imagen) }}" alt="Profile Picture">

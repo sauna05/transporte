@@ -56,6 +56,8 @@ class vehicleController extends Controller
         return redirect()->route('admin.create-vehicles')->with('message', 'Vehículo creado con éxito');
     }
 
+
+
     public function show($id)
     {
         $vehicle = Vehicle::findOrFail($id);

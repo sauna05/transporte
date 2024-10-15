@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('origin'); // Origen de la ruta
             $table->string('destination'); // Destino de la ruta
             $table->float('distance'); // Distancia de la ruta
+            $table->decimal('price',15,2);
             $table->enum('status', ['pendiente', 'en curso', 'entregada'])->default('pendiente'); // Estado de la entrega
 
             $table->timestamps();

@@ -32,10 +32,22 @@
         <article class="w-80 space-y-3 rounded-md p-2 ">
 
             <h2 class="text-2xl font-bold">VEHICULOS</h2>
+            @php
+                $contador=0;
+          
+            @endphp
+                  
+            @foreach ($vehicles as $vehicle)
+                @php
+                    $contador++; 
+                @endphp
+            @endforeach
+
+            
 
             <div class="flex">
                 <h4 class="w-52 text-right pr-4 font-bold">Total Vehiculos:</h4>
-                <p class="parrafo text-left">39</p>
+                <p class="parrafo text-left font-bold ">{{ $contador }}</p>
             </div>
     
             <div class="flex">
@@ -55,12 +67,20 @@
         </article>
     
         <article class="w-80 space-y-3 rounded-md p-2 ">
+            @php
+            $driver_cont=0;
+            @endphp
+            @foreach ($driver as $dri )
+                    @php
+                      $driver_cont++; 
+                     @endphp
+            @endforeach
 
             <h2 class="text-2xl font-bold">CONDUCTORES</h2>
 
             <div class="flex">
                 <h4 class="w-52 text-right pr-4 font-bold">Total conductores:</h4>
-                <p class="parrafo text-left">39</p>
+                <p class="parrafo text-left">{{ $driver_cont }}</p>
             </div>
     
             <div class="flex">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Driver;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -24,6 +25,12 @@ class UserController extends Controller
     public function  loginForm(){
         return view('login');
     }
+    public function reports(){
+        $vehicles=Vehicle::all();
+        $driver=Driver::all();
+        return view('admin.reports-show',compact('vehicles','driver'));
+    }
+    
 
 
 
