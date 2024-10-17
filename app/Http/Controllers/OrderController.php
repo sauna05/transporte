@@ -38,7 +38,7 @@ class OrderController extends Controller
             return redirect()->back()->withErrors(['customer' => 'No se encontró un cliente asociado a tu cuenta.']);
         }
 
-        $precioPorKilometro = 10; // por cada kilometro sumo 10 unidades
+        $precioPorKilometro = 5000; // por cada kilometro sumo 5000
         $valor = $request->distance * $precioPorKilometro;
     
         // Crear la ruta 
