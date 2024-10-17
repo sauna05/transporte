@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\User;
 use App\Models\Driver;
 use App\Models\Vehicle;
@@ -26,9 +27,18 @@ class UserController extends Controller
         return view('login');
     }
     public function reports(){
-        $vehicles=Vehicle::all();
+        $vehicles_to=Vehicle::all();
         $driver=Driver::all();
-        return view('admin.reports-show',compact('vehicles','driver'));
+        $customer = Customer::all();
+        //sacar los conductores disponibles
+        $drivers = Driver::with('user')->where('availability', 'disponible')->get(); 
+        //sacar los vehicles disponibles
+        $vehicles = Vehicle::where('status', 'disponible')->get(); 
+        //sacar los conductores ocupados
+        $drivers_ocu = Driver::with('user')->where('availability', 'ocupado')->get(); 
+        //sacar los vehiculos ocupados
+        $vehicles_ocu = Vehicle::where('status', 'ocupado')->get();
+        return view('admin.reports-show',compact('vehicles','driver','vehicles_to','drivers','vehicles','customer','drivers_ocu','vehicles_ocu'));
     }
     
 

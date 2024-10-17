@@ -9,7 +9,7 @@ class Route extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['origin', 'destination', 'distance', 'status'];
+    protected $fillable = ['origin', 'destination', 'distance', 'status','price'];
 
     // Relación de muchos a muchos con conductores
     public function drivers()

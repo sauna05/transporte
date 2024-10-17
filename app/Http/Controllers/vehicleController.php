@@ -81,7 +81,7 @@ class vehicleController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
+       
         $vehicle = Vehicle::findOrFail($id);
         
         // Actualizar solo los campos relevantes

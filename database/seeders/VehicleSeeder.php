@@ -21,6 +21,12 @@ class VehicleSeeder extends Seeder
         ]);
 
         Vehicle::create([
+           'type'=>'Toyota',
+           'capacity'=>2000,
+           'imagen'=>null,
+        ]);
+
+        Vehicle::create([
             'type' => 'Furgoneta',
             'capacity' => 1500, // Capacidad en kg
             'imagen'=>null,
