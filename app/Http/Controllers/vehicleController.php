@@ -58,10 +58,10 @@ class vehicleController extends Controller
 
 
 
-    public function show($id)
+    public function vehicle_show($id)
     {
         $vehicle = Vehicle::findOrFail($id);
-        return view('admin.vehicles.show', compact('vehicle'));
+        return view('admin.vehicles-show', compact('vehicle'));
     }
 
     public function edit($id)
@@ -97,4 +97,6 @@ class vehicleController extends Controller
         
         return redirect()->route('admin.vehicles.index')->with('success', 'Vehículo eliminado con éxito');
     }
+
+    
 }

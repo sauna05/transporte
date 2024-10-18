@@ -13,7 +13,7 @@
             </div>
         @else
             @foreach ($vehicles as $vehicle)
-                <a class="flex w-2/4 border-b-2 border-gray-500 hover:bg-gray-300/50 rounded-md p-2 space-x-5" href="#">
+                <a class="flex w-2/4 border-b-2 border-gray-500 hover:bg-gray-300/50 rounded-md p-2 space-x-5" href="{{route('admin.vehicle_show',$vehicle->id)}}">
                     <div class="flex justify-center items-center">
                         @if($vehicle->imagen) 
                             <img src="{{ asset('storage/' . $vehicle->imagen) }}" class="w-36" alt="{{ $vehicle->type }}">

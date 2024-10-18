@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
 use App\Models\User;
+use App\Models\Order;
+use App\Models\Route;
 use App\Models\Driver;
 use App\Models\Vehicle;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
@@ -38,7 +40,17 @@ class UserController extends Controller
         $drivers_ocu = Driver::with('user')->where('availability', 'ocupado')->get(); 
         //sacar los vehiculos ocupados
         $vehicles_ocu = Vehicle::where('status', 'ocupado')->get();
-        return view('admin.reports-show',compact('vehicles','driver','vehicles_to','drivers','vehicles','customer','drivers_ocu','vehicles_ocu'));
+        //gestionar la cantidad de pedidos
+        $orders = Order::all();
+        //filtrar los pedidos en progreso
+        $order_pro = Route::where('status','en curso')->get();
+        //filtrar pedidos pendientes
+        $order_pend = Route::where('status', 'pendiente')->get();
+        $price_count = Route::sum('price');
+        return view('admin.reports-show',
+        compact('vehicles','driver',
+        'vehicles_to','drivers','vehicles','customer',
+        'drivers_ocu','vehicles_ocu','orders','order_pro','order_pend','price_count'));
     }
     
 

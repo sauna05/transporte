@@ -27,6 +27,8 @@ Route::middleware(['role:admin'])->group(function () {
     Route::post('/admin/register', [VehicleController::class, 'store'])->name('register_vehicle');
     Route::get('/admin/vehicles', [VehicleController::class, 'index'])->name('admin.vehicles');
     Route::get('/admin/reports',[UserController::class, 'reports'])->name('admin.reports');
+
+    Route::get('/admin/vehicle/{id}', [vehicleController::class, 'vehicle_show'])->name('admin.vehicle_show');
    
     // Route::get('/admin/vehicles/{id}/edit', [VehicleController::class, 'edit'])->name('admin.vehicles.edit');
     // Route::post('/admin/vehicles/{id}', [VehicleController::class, 'update'])->name('admin.vehicles.update');

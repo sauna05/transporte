@@ -54,9 +54,9 @@
 
             if (!isNaN(distance) && distance >= 0) {
                 const totalPrice = distance * pricePerKilometer;
-                priceLabel.textContent = totalPrice.toFixed(2); 
+                priceLabel.textContent = `$ ${totalPrice.toFixed(2)}`; 
             } else {
-                priceLabel.textContent = '0.00'; 
+                priceLabel.textContent = '$ 0.00'; 
             }
         });
     </script>

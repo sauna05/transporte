@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            <h2 class="fixed right-36 top-56 font-bold text-2xl">Rutas</h2>
+       
         </div>
     </form>
 
